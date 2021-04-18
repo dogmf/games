@@ -40,8 +40,7 @@ jobs:
     - run: git stash
     - run: mv build /tmp
     - run: git fetch
-    - run: git checkout -b gh-pages
-    - run: git branch --set-upstream-to origin/gh-pages
+    - run: git checkout gh-pages
     - run: rm -rf *
     - run: mv /tmp/build/* .
     - run: |
