@@ -1,0 +1,32 @@
+$transparent-gray: rgba(128, 128, 128, 0.25);
+$screen-break-point: 960px;
+
+@mixin column-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+@mixin card {
+  padding: 1em;
+  box-shadow: 0 0.3em 0.3em $transparent-gray;
+  border-radius: 0.3em;
+  &:is(a) {
+    transition: 0.1s;
+    &:hover {
+      box-shadow: 0 0.5em 1em $transparent-gray;
+    }
+    &:active {
+      box-shadow: 0 0 0.3em $transparent-gray;
+    }
+  }
+}
+
+@mixin overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
