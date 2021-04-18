@@ -1,18 +1,14 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import games from "../../Games";
 import CLASSES from "./Breadcrumbs.module.scss";
-
-interface BreadcrumbsProps {
-  [a: string]: any;
-}
 
 function getName(code: string) {
   let game = games.find((g) => g.code === code);
   return game ? game.name : code;
 }
 
-function Breadcrumbs(props: any) {
+function Breadcrumbs(props: RouteComponentProps) {
   const { location } = props;
   const paths = location.pathname.split("/").filter((a: string) => a);
   return (
