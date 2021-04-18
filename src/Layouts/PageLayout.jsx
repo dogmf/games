@@ -1,8 +1,16 @@
 import CLASSES from "./Layouts.module.scss";
-import React from "react";
+import React, { useEffect } from "react";
 
 function PageLayout(props) {
-  const { header, children } = props;
+  const { header, children, title } = props;
+
+  useEffect(() => {
+    if (title) {
+      const oldTitle = document.title;
+      document.title = title;
+      return () => (document.title = oldTitle);
+    }
+  }, [title]);
 
   return (
     <div className={CLASSES.pageContainer}>

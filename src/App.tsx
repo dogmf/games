@@ -8,7 +8,7 @@ import { homepage } from "./config.json";
 
 const App = () => {
   return (
-    <PageLayout header={<Breadcrumbs />}>
+    <PageLayout title="dogmf/games"  header={<Breadcrumbs />}>
       <Switch>
         <Route path={homepage}>
           <Switch>
