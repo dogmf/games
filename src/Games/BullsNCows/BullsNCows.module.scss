@@ -1,0 +1,38 @@
+@use "../../styles/declarations.scss" as d;
+
+.container {
+  @include d.card;
+  @include d.column-flex;
+  align-items: center;
+  min-height: 50vh;
+  min-width: 50vw;
+  border: 1px solid d.$transparent-gray;
+  font-size: 2em;
+  font-family: monospace;
+  position: relative;
+  .buttonScreen {
+    @include d.overlay;
+    @include d.column-flex;
+  }
+  ul {
+    overflow: auto;
+    max-height: 30vh;
+    padding: 1em 2em;
+  }
+  button {
+    font-size: inherit;
+    font-family: monospace;
+    padding: 1em;
+    text-align: center;
+    border: 1px solid d.$transparent-gray;
+    width: 50%;
+    margin: auto;
+  }
+  input {
+    font-size: inherit;
+    font-family: monospace;
+    padding: 0;
+    text-align: center;
+    border: 1px solid d.$transparent-gray;
+  }
+}
