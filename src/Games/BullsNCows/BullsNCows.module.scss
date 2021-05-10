@@ -1,32 +1,58 @@
 @use "../../styles/declarations.scss" as d;
 
 .container {
+  
+  @mixin segment {
+    margin-bottom: d.$medium-gap;
+  }
+
   @include d.card;
   @include d.column-flex;
-  align-items: center;
+  align-items: stretch;
   min-height: 50vh;
   min-width: 50vw;
   border: 1px solid d.$transparent-gray;
   font-size: 2em;
   font-family: monospace;
   position: relative;
+  max-height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
   .buttonScreen {
     @include d.overlay;
     @include d.column-flex;
+    button {
+      padding: 1em;
+      width: 50%;
+      margin: auto;
+    }
   }
-  ul {
+  .guessesList {
     overflow: auto;
-    max-height: 30vh;
-    padding: 1em 2em;
+    padding: 0.3em;
+    border: 1px solid d.$transparent-gray;
+    box-shadow: 0 0.3em 0.3em d.$transparent-gray inset;
+    flex: 1 1 100%;
+    > * {
+      margin: 0.3em;
+      margin-left: 1em;
+    }
+  }
+  .topContainerMenu {
+    @include segment;
+    display: grid;
+    gap: d.$medium-gap;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(10em, 1fr)
+    ); //10em - 4 digit input width
   }
   button {
     font-size: inherit;
     font-family: monospace;
-    padding: 1em;
     text-align: center;
     border: 1px solid d.$transparent-gray;
-    width: 50%;
-    margin: auto;
+    padding: 0.3em 0.7em;
   }
   input {
     font-size: inherit;
@@ -34,5 +60,21 @@
     padding: 0;
     text-align: center;
     border: 1px solid d.$transparent-gray;
+  }
+  .errorSegment {
+    color: red;
+    @include segment;
+  }
+}
+
+$numberCellSize: 1.2em;
+.numberInput {
+  white-space: nowrap;
+  font-size: 2em;
+  .singleNumberInput {
+    font-family: monospace;
+    display: inline-block;
+    width: $numberCellSize;
+    height: $numberCellSize;
   }
 }

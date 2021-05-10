@@ -1,25 +1,35 @@
-import React, { FormEvent, Fragment, useCallback, useState } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import PageLayout from "../../Layouts/PageLayout";
 import useGameState from "./useGameState";
 import CLASSES from "./BullsNCows.module.scss";
+import NumberInput from "./NumberInput";
+import GuessList from "./GuessList";
 
 function BullsNCowsPage() {
   let { state, start, guess } = useGameState();
   let { ended, turns, number } = state;
 
   const [inputValue, setInputValue] = useState<string>("");
+  const [error, setError] = useState<string>();
 
-  const onInputChangeHandler = useCallback((e) => {
-    setInputValue(e.target.value);
-  }, []);
-
-  let onSubmitHandler = useCallback(
-    (e: FormEvent) => {
-      e.preventDefault();
+  const makeGuess = useCallback(() => {
+    setError(undefined);
+    try {
       guess(inputValue);
-      setInputValue("");
+      setInputValue("0000");
+    } catch (err) {
+      setError(err.toString());
+    }
+  }, [guess, inputValue]);
+
+  let onKeyHandler = useCallback(
+    (e) => {
+      if (e.charCode === 13) {
+        e.preventDefault();
+        makeGuess();
+      }
     },
-    [inputValue, guess]
+    [makeGuess]
   );
 
   return (
@@ -27,27 +37,29 @@ function BullsNCowsPage() {
       <div className={CLASSES.container}>
         {!!number && (
           <Fragment>
-            <ul>
-              {turns.map(({ guess, cows, bulls }) => (
-                <li key={guess}>
-                  {guess}:C{cows}B{bulls}
-                </li>
-              ))}
-            </ul>
-            <form onSubmit={onSubmitHandler}>
-              <input
-                type="text"
-                name="guess"
+            <div className={CLASSES.topContainerMenu} onKeyPress={onKeyHandler}>
+              <NumberInput
+                length={4}
+                onChange={setInputValue}
+                value={ended ? number : inputValue}
                 disabled={ended}
-                onChange={onInputChangeHandler}
-                value={inputValue}
               />
-            </form>
+
+              {ended ? (
+                <button onClick={start}>START NEW</button>
+              ) : (
+                <button onClick={makeGuess}>Guess</button>
+              )}
+            </div>
+            {error && (
+              <div className={CLASSES.errorSegment}>{error}</div>
+            )}
+            <GuessList turns={turns} />
           </Fragment>
         )}
-        {(ended || !number) && (
+        {!number && (
           <div className={CLASSES.buttonScreen}>
-            <button onClick={() => start()}>START{ended && " NEW"}</button>
+            <button onClick={start}>START</button>
           </div>
         )}
       </div>

@@ -1,8 +1,8 @@
-import  { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 type GuessTarget = string;
 
-type GameTurn = {
+export type GameTurn = {
   guess: GuessTarget;
   cows: number;
   bulls: number;
@@ -48,18 +48,44 @@ function countCowsNBulls(
   return [cows, bulls];
 }
 
+class ValidationError extends Error {
+  constructor(message?: string) {
+    super(message);
+    this.name = "Validation Error";
+  }
+}
+
+function checkIfGuessIsLegal(guess: GuessTarget, turns: GameTurn[]) {
+  let errors = [];
+  if (guess.split("").some((char) => isNaN(Number(char))))
+    errors.push("Guess can be declared only in digits");
+  // for duplication in digits
+  if (guess.length !== new Set(guess).size)
+    errors.push("Guess has duplicated digits");
+  // for duplication in turns
+  if (turns.some((t) => t.guess === guess))
+    errors.push("Guess has already been done");
+
+  if (errors.length === 1) {
+    throw new ValidationError(errors.join("; "));
+  }
+}
+
 function useGameState(): Game {
   const [number, setNumber] = useState<GuessTarget | undefined>(undefined);
   const [turns, setTurns] = useState<GameTurn[]>([]);
   const [ended, setEnded] = useState<boolean>(false);
   const start = useCallback<startFunction>(() => {
-    setNumber(getRandomNumber());
+    const number = getRandomNumber();
+    setNumber(number);
     setTurns([]);
     setEnded(false);
+    // console.log(`Game started with "${number}" as number.`);
   }, []);
   const guess = useCallback<guessFunction>(
     (guessedNumber: GuessTarget) => {
       if (!number) return;
+      checkIfGuessIsLegal(guessedNumber, turns);
       const [cows, bulls] = countCowsNBulls(number, guessedNumber);
       let turnResult: GameTurn = {
         guess: guessedNumber,
@@ -71,7 +97,7 @@ function useGameState(): Game {
         return [...turns, turnResult];
       });
     },
-    [number]
+    [number, turns]
   );
   let state = useMemo<bncGameState>(
     () => ({
