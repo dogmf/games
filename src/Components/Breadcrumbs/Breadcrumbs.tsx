@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import games from "../../Games";
 import CLASSES from "./Breadcrumbs.module.scss";
@@ -15,14 +15,14 @@ function Breadcrumbs(props: RouteComponentProps) {
     <div className={CLASSES.Breadcrumbs}>
       {paths.map((p: string, index: number, full: string[]) =>
         index !== full.length - 1 ? (
-          <>
-            <Link key={p} to={"/" + full.slice(0, index + 1).join("/")}>
+          <Fragment key={p}>
+            <Link to={"/" + full.slice(0, index + 1).join("/")}>
               {getName(p)}
             </Link>
             {" / "}
-          </>
+          </Fragment>
         ) : (
-          <span>{getName(p)}</span>
+          <span key={p}>{getName(p)}</span>
         )
       )}
     </div>

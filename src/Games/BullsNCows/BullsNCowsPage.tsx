@@ -1,9 +1,9 @@
 import React, { Fragment, useCallback, useState } from "react";
 import PageLayout from "../../Layouts/PageLayout";
-import useGameState from "./useGameState";
+import useGameState from "./components/useGameState";
 import CLASSES from "./BullsNCows.module.scss";
-import NumberInput from "./NumberInput";
-import GuessList from "./GuessList";
+import NumberInput from "./components/NumberInput";
+import GuessList from "./components/GuessList";
 
 function BullsNCowsPage() {
   let { state, start, guess } = useGameState();
@@ -51,9 +51,7 @@ function BullsNCowsPage() {
                 <button onClick={makeGuess}>Guess</button>
               )}
             </div>
-            {error && (
-              <div className={CLASSES.errorSegment}>{error}</div>
-            )}
+            {error && <div className={CLASSES.errorSegment}>{error}</div>}
             <GuessList turns={turns} />
           </Fragment>
         )}

@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import CLASSES from "./BullsNCows.module.scss";
+import CLASSES from "../BullsNCows.module.scss";
 
 interface InputProps<F> {
   value: F;
@@ -51,10 +51,11 @@ function SingleNumberInput(props: InputProps<string>) {
     <input
       {...otherProps}
       maxLength={1}
-      // onChange={(e) => onChange(e.target.value)}
+      onChange={() => {}}
       onKeyUp={keyPressHandler}
       className={CLASSES.singleNumberInput}
       value={value}
+      pattern="\d*"
     />
   );
 }

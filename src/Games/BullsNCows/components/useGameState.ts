@@ -63,8 +63,9 @@ function checkIfGuessIsLegal(guess: GuessTarget, turns: GameTurn[]) {
   if (guess.length !== new Set(guess).size)
     errors.push("Guess has duplicated digits");
   // for duplication in turns
-  if (turns.some((t) => t.guess === guess))
-    errors.push("Guess has already been done");
+  let duplicateIndex = turns.findIndex((t) => t.guess === guess);
+  if (duplicateIndex >= 0)
+    errors.push(`Guess has already been done on ${duplicateIndex + 1} turn`);
 
   if (errors.length === 1) {
     throw new ValidationError(errors.join("; "));
