@@ -27,7 +27,9 @@ function GameCard(game) {
 function GamesList() {
   return (
     <div className={CLASSES.GamesListContainer}>
-      {games.map((game) => React.createElement(GameCard, game))}
+      {games.map((game) =>
+        React.createElement(GameCard, { ...game, key: game.code })
+      )}
     </div>
   );
 }

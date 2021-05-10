@@ -1,5 +1,6 @@
 $transparent-gray: rgba(128, 128, 128, 0.25);
 $screen-break-point: 960px;
+$medium-gap:1em;
 
 @mixin column-flex {
   display: flex;
@@ -9,7 +10,7 @@ $screen-break-point: 960px;
 }
 
 @mixin card {
-  padding: 1em;
+  padding: $medium-gap;
   box-shadow: 0 0.3em 0.3em $transparent-gray;
   border-radius: 0.3em;
   &:is(a) {
