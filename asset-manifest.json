@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/games/static/css/main.08aab34b.chunk.css",
+    "main.js": "/games/static/js/main.a7683da2.chunk.js",
+    "main.js.map": "/games/static/js/main.a7683da2.chunk.js.map",
+    "runtime-main.js": "/games/static/js/runtime-main.d5abd473.js",
+    "runtime-main.js.map": "/games/static/js/runtime-main.d5abd473.js.map",
+    "static/js/2.e577714c.chunk.js": "/games/static/js/2.e577714c.chunk.js",
+    "static/js/2.e577714c.chunk.js.map": "/games/static/js/2.e577714c.chunk.js.map",
+    "index.html": "/games/index.html",
+    "static/css/main.08aab34b.chunk.css.map": "/games/static/css/main.08aab34b.chunk.css.map",
+    "static/js/2.e577714c.chunk.js.LICENSE.txt": "/games/static/js/2.e577714c.chunk.js.LICENSE.txt",
+    "static/media/Tic_tac_toe.svg.150fa236.png": "/games/static/media/Tic_tac_toe.svg.150fa236.png",
+    "static/media/cattle-like-mammal-cow-goat-family-dairy-holstein-friesian.3dd66962.jpg": "/games/static/media/cattle-like-mammal-cow-goat-family-dairy-holstein-friesian.3dd66962.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d5abd473.js",
+    "static/js/2.e577714c.chunk.js",
+    "static/css/main.08aab34b.chunk.css",
+    "static/js/main.a7683da2.chunk.js"
+  ]
+}
